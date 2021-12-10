@@ -25,9 +25,11 @@ namespace SPO_2
 
             analizer.ConsoleData();
 
-
+            analizer.ConsoleDataMultiplicity();
 
             //Этап 2 - Вычисление объёма данных
+
+
 
             Console.ReadKey();
 

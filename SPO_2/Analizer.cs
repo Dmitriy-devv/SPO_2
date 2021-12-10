@@ -109,9 +109,11 @@ namespace SPO_2
             Console.WriteLine("------------------------------------------");
             Console.WriteLine($"Name\t\tSize\tData type");
             Console.WriteLine("------------------------------------------");
+            var dataSize = 0;
             foreach (var word in dataT)
             {
                 Console.WriteLine($"{word.Key}\t\t{Size(word.Value)}\t{word.Value}");
+                dataSize += Size(word.Value);
             }
             foreach (var word in dataStructs)
             {
@@ -119,10 +121,72 @@ namespace SPO_2
                 foreach(var element in word.Value)
                 {
                     size += Size(element.Value);
+                    dataSize += Size(element.Value);
                 }
                 
                 Console.WriteLine($"{word.Key}\t\t{size}\tstruct");
             }
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine($"Data summary: {dataSize}");
+            Console.WriteLine("------------------------------------------");
+        }
+
+        public void ConsoleDataMultiplicity()
+        {
+            Console.WriteLine($"\nVariables (с кратностью распределения памяти 2)");
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine($"Name\t\tSize\tData type");
+            Console.WriteLine("------------------------------------------");
+            var dataSize = 0;
+            foreach (var word in dataT)
+            {
+                
+                var sizeT = 0;
+                if(Size(word.Value) < 2)
+                {
+                    sizeT += 2;
+                }
+                else if(Size(word.Value) > 2)
+                {
+                    foreach(var element in typesStructs[word.Value])
+                    {
+                        sizeT += 2;
+                    }
+                }
+                else 
+                {
+                    sizeT += 2;
+                }
+                dataSize += sizeT;
+                Console.WriteLine($"{word.Key}\t\t{sizeT}\t{word.Value}");
+            }
+            foreach (var word in dataStructs)
+            {
+                var size = 0;
+                foreach (var element in word.Value)
+                {
+                    if (Size(element.Value) < 2)
+                    {
+                        size += 2;
+                    }
+                    else if (Size(element.Value) > 2)
+                    {
+                        foreach (var el in typesStructs[element.Value])
+                        {
+                            size += 2;
+                        }
+                    }
+                    else
+                    {
+                        size += 2;
+                    }
+                    
+                }
+                dataSize += size;
+                Console.WriteLine($"{word.Key}\t\t{size}\tstruct");
+            }
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine($"Data summary: {dataSize}");
             Console.WriteLine("------------------------------------------");
         }
 
