@@ -14,13 +14,13 @@ namespace SPO_2
             {
                 analizer.State = this;
             }
-            else if(char.IsLetter(letter))
+            else if(letter == ';')
             {
-
+                analizer.State = new StateSTTEND();
             }
             else
             {
-
+                analizer.IsError = true;
             }
         }
     }

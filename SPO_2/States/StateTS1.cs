@@ -14,6 +14,8 @@ namespace SPO_2
             {
                 if(analizer.tempWord == "var")
                 {
+                    analizer.tempWord = string.Empty;
+                    analizer.tempType = string.Empty;
                     analizer.isType = false;
                     analizer.State = new StateV();
                     return;

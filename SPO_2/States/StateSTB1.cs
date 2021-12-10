@@ -12,15 +12,16 @@ namespace SPO_2
         {
             if(analizer.escapeSymbols.Contains(letter))
             {
-                analizer.State = this;
+                analizer.State = new StateSTS2();
             }
             else if(char.IsLetter(letter))
             {
-
+                analizer.tempType += letter;
+                analizer.State = new StateSTT();
             }
             else
             {
-
+                analizer.IsError = true;
             }
         }
     }

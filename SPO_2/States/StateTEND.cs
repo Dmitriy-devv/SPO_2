@@ -12,7 +12,7 @@ namespace SPO_2
         {
             if (analizer.isStruct)
             {
-
+                analizer.isStruct = false;
             }
             else
             {

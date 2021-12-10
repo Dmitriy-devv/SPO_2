@@ -10,36 +10,28 @@ namespace SPO_2
             var textReader = new TextReader(path);
             var code = textReader.Read();
             Console.WriteLine($"Текст из файла:\n{code} ");
-            Space();
-
+            Console.Write('\n');
             //Этап 1 - Лексический анализатор
             var analizer = new Analizer(code, new StateN());
             analizer.Analize();
             if (analizer.IsError)
             {
-                Console.WriteLine(analizer.ErrorMsg);
+                Console.WriteLine($"Возникла ошибка при чтение текста: {analizer.ErrorMsg}");
+                return;
             }
-            foreach(var word in analizer.typesT)
-            {
-                Console.WriteLine(word.Key + "  " + word.Value);
-            }
-            foreach (var word in analizer.typesStructs)
-            {
-                Console.WriteLine(word.Key + " is struct");
-            }
-            Console.WriteLine(analizer.tempWord + " is tempWord");
-            Console.WriteLine(analizer.tempType + " is tempType");
+            Console.WriteLine("------------------------------------------");
+
+            analizer.ConsoleTypes();
+
+            analizer.ConsoleData();
+
+
+
             //Этап 2 - Вычисление объёма данных
-
-
 
             Console.ReadKey();
 
         }
 
-        private static void Space()
-        {
-            Console.WriteLine("------------------------------------------");
-        }
     }
 }

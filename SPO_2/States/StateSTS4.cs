@@ -16,11 +16,12 @@ namespace SPO_2
             }
             else if(char.IsLetter(letter))
             {
-
+                analizer.tempWord += letter;
+                analizer.State = new StateSTW();
             }
             else
             {
-
+                analizer.IsError = true;
             }
         }
     }

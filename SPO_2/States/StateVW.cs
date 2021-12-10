@@ -10,17 +10,21 @@ namespace SPO_2
     {
         public void Read(Analizer analizer, char letter)
         {
-            if(analizer.escapeSymbols.Contains(letter))
+            if (analizer.escapeSymbols.Contains(letter))
             {
-                analizer.State = this;
+                analizer.State = new StateVS1();
             }
-            else if(char.IsLetter(letter))
+            else if (char.IsLetter(letter))
             {
-
+                analizer.tempWord += letter;
+            }
+            else if (letter == ':')
+            {
+                analizer.State = new StateVEQ();
             }
             else
             {
-
+                analizer.IsError = true;
             }
         }
     }
