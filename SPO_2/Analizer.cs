@@ -55,9 +55,10 @@ namespace SPO_2
             State = state;
         }
 
+        // Анализ текста
         public void Analize()
         {
-            
+            // Анализ по каждому символу, пока нет ошибки
             foreach (var symbol in Code)
             {
                 if (IsError) return;
@@ -66,12 +67,14 @@ namespace SPO_2
             
         }
         
+        // Вывод типов
         public void ConsoleTypes()
         {
             Console.WriteLine($"\nTypes");
             Console.WriteLine("------------------------------------------");
             Console.WriteLine($"Name\t\tSize\tData type");
             Console.WriteLine("------------------------------------------");
+            // Вывод простых типов
             foreach (var word in typesT)
             {
                 if(word.Key.Length < 8)
@@ -83,6 +86,7 @@ namespace SPO_2
                     Console.WriteLine($"{word.Key}\t{word.Value}\tvariable");
                 }
             }
+            // Вывод структур
             foreach (var word in typesStructs)
             {
                 var size = 0;
@@ -103,6 +107,7 @@ namespace SPO_2
             Console.WriteLine("------------------------------------------");
         }
 
+        // Вывод переменных
         public void ConsoleData()
         {
             Console.WriteLine($"\nVariables");
@@ -110,11 +115,13 @@ namespace SPO_2
             Console.WriteLine($"Name\t\tSize\tData type");
             Console.WriteLine("------------------------------------------");
             var dataSize = 0;
+            // Вывод простых переменных
             foreach (var word in dataT)
             {
                 Console.WriteLine($"{word.Key}\t\t{Size(word.Value)}\t{word.Value}");
                 dataSize += Size(word.Value);
             }
+            // Вывод структур
             foreach (var word in dataStructs)
             {
                 var size = 0;
@@ -126,11 +133,13 @@ namespace SPO_2
                 
                 Console.WriteLine($"{word.Key}\t\t{size}\tstruct");
             }
+            // Вывод общего количества занимаемой памяти
             Console.WriteLine("------------------------------------------");
             Console.WriteLine($"Data summary: {dataSize}");
             Console.WriteLine("------------------------------------------");
         }
 
+        // Вывод переменных с учетом кратности
         public void ConsoleDataMultiplicity()
         {
             Console.WriteLine($"\nVariables (с кратностью распределения памяти 2)");
@@ -138,10 +147,12 @@ namespace SPO_2
             Console.WriteLine($"Name\t\tSize\tData type");
             Console.WriteLine("------------------------------------------");
             var dataSize = 0;
+            // Вывод простых переменных
             foreach (var word in dataT)
             {
                 
                 var sizeT = 0;
+                // Учет кратности
                 if(Size(word.Value) < 2)
                 {
                     sizeT += 2;
@@ -160,9 +171,11 @@ namespace SPO_2
                 dataSize += sizeT;
                 Console.WriteLine($"{word.Key}\t\t{sizeT}\t{word.Value}");
             }
+            // Вывод структур данных
             foreach (var word in dataStructs)
             {
                 var size = 0;
+                // Учет кратности
                 foreach (var element in word.Value)
                 {
                     if (Size(element.Value) < 2)
@@ -185,11 +198,13 @@ namespace SPO_2
                 dataSize += size;
                 Console.WriteLine($"{word.Key}\t\t{size}\tstruct");
             }
+            // Вывод общего количества занимаемой памяти
             Console.WriteLine("------------------------------------------");
             Console.WriteLine($"Data summary: {dataSize}");
             Console.WriteLine("------------------------------------------");
         }
 
+        // Вычисление памяти переменной
         public int Size(string type)
         {
             var size = 0;
